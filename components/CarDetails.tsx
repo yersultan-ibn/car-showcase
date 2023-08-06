@@ -2,8 +2,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
+import { generateCarImageUrl } from "@/utils";
 
-const CarDetails = ({ isOpen, closeModal }) => {
+const CarDetails = ({ isOpen, closeModal, car }) => {
+  const { city_mpg, year, make, model, transmission, drive } = car;
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -39,35 +42,37 @@ const CarDetails = ({ isOpen, closeModal }) => {
                     <div className="modal-top__main">
                       <img
                         className="w-[50%] m-auto"
-                        src="https://project-next13-car-showcase-mu.vercel.app/_next/image?url=https%3A%2F%2Fcdn.imagin.studio%2Fgetimage%3Fcustomer%3Dusnexacore%26make%3Dbmw%26modelFamily%3Dm8%26zoomType%3Dfullscreen%26modelYear%3D2022%26angle%3Dundefined&w=3840&q=75"
+                        src={generateCarImageUrl(car)}
                         alt=""
                       />
                     </div>
                     <div className="modal-mini__wrapper">
                       <div className="modal-top__mini">
-                        <img
-                          src="https://project-next13-car-showcase-mu.vercel.app/_next/image?url=https%3A%2F%2Fcdn.imagin.studio%2Fgetimage%3Fcustomer%3Dusnexacore%26make%3Dbmw%26modelFamily%3Dm8%26zoomType%3Dfullscreen%26modelYear%3D2022%26angle%3D29&w=3840&q=75"
-                          alt=""
-                        />
+                        <img src={generateCarImageUrl(car, "29")} alt="" />
                       </div>
                       <div className="modal-top__mini">
-                        <img
-                          src="https://project-next13-car-showcase-mu.vercel.app/_next/image?url=https%3A%2F%2Fcdn.imagin.studio%2Fgetimage%3Fcustomer%3Dusnexacore%26make%3Dbmw%26modelFamily%3Dm8%26zoomType%3Dfullscreen%26modelYear%3D2022%26angle%3D33&w=3840&q=75"
-                          alt=""
-                        />
+                        <img src={generateCarImageUrl(car, "33")} alt="" />
                       </div>
                       <div className="modal-top__mini">
-                        <img
-                          src="https://project-next13-car-showcase-mu.vercel.app/_next/image?url=https%3A%2F%2Fcdn.imagin.studio%2Fgetimage%3Fcustomer%3Dusnexacore%26make%3Dbmw%26modelFamily%3Dm8%26zoomType%3Dfullscreen%26modelYear%3D2022%26angle%3D13&w=3840&q=75"
-                          alt=""
-                        />
+                        <img src={generateCarImageUrl(car, "13")} alt="" />
                       </div>
                     </div>
                   </div>
                   <div className="modal-content">
-                    <h2 className="font-bold text-xl mt-5">
-                      Bmw M8 Competition Coupe
+                    <h2 className="font-bold text-xl mt-5 capitalize">
+                      {make} {model}
                     </h2>
+                    {Object.entries(car).map(([key, value]) => (
+                      <div className="modal-content__item" key={key}>
+                        <p className="text-grey capitalize">
+                          {key.split("_").join(" ")}
+                        </p>
+                        <span className="text-black-100 font-semibold">
+                          {value}
+                        </span>
+                      </div>
+                    ))}
+                    {/*                   
                     <div className="modal-content__item">
                       <p className="text-grey capitalize">City Mpg</p>
                       <span className="text-black-100 font-semibold">15</span>
@@ -75,11 +80,7 @@ const CarDetails = ({ isOpen, closeModal }) => {
                     <div className="modal-content__item">
                       <p className="text-grey capitalize">City Mpg</p>
                       <span className="text-black-100 font-semibold">15</span>
-                    </div>
-                    <div className="modal-content__item">
-                      <p className="text-grey capitalize">City Mpg</p>
-                      <span className="text-black-100 font-semibold">15</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

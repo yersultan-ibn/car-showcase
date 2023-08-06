@@ -20,9 +20,13 @@ export default async function Home({ searchParams }: CarCardProps) {
       <NavBar />
       <Hero />
       {/* <CardList /> */}
-      {allCars.map((car, index) => (
-        <CarCard car={car} />
-      ))}
+      <div className="max-w-[1440px] mx-auto">
+        <div className="home__cars-wrapper">
+          {allCars.map((car, index) => (
+            <CarCard car={car} />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
