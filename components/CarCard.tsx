@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import CustomButton from "./CustomButton";
 import CarDetails from "./CarDetails";
+import { generateCarImageUrl } from "@/utils";
 
 const CarCard = ({ car }) => {
   const { city_mpg, year, make, model, transmission, drive } = car;
@@ -28,8 +29,8 @@ const CarCard = ({ car }) => {
           </p>
         </div>
         <img
-          src="https://project-next13-car-showcase-mu.vercel.app/_next/image?url=https%3A%2F%2Fcdn.imagin.studio%2Fgetimage%3Fcustomer%3Dusnexacore%26make%3Dporsche%26modelFamily%3Dcayenne%26zoomType%3Dfullscreen%26modelYear%3D2023%26angle%3Dundefined&w=3840&q=75"
-          alt=""
+          src={generateCarImageUrl(car)}
+          alt="car"
         />
         <div className="car-card__bottom group-hover:invisible">
           <div className="car-card__icon">
